@@ -1,6 +1,13 @@
 import Image from "next/image";
+import { getCurrentUser } from "@/app/lib/sesstion";
+import { UserInfo } from "@/types/user";
+import Link from "next/link";
+import SignOut from "@/components/SignOut";
 
-export default function Home() {
+export default async function Home() {
+  const user = (await getCurrentUser()) as UserInfo;
+  console.log(user);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -37,6 +44,41 @@ export default function Home() {
           height={37}
           priority
         />
+      </div>
+
+      <div>
+        <div className="flex">
+          {user?.image ? (
+            <>
+              {" "}
+              Current User:{" "}
+              <Image
+                className="relative rounded-full ml-3 dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
+                src={user.image}
+                alt="Next.js Logo"
+                width={36}
+                height={36}
+                priority
+              />
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        {!user ? (
+          <div className="">
+            Next-Auth的demo请到
+            <Link
+              href="/login"
+              className="hover:text-brand underline underline-offset-4"
+            >
+              登录页
+            </Link>
+            体验
+          </div>
+        ) : (
+          <SignOut></SignOut>
+        )}
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
