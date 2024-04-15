@@ -4,7 +4,7 @@ services:
     volumes:
       - ./.postgres:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5432:5432 # 本地端口:容器端口
     environment:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword

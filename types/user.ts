@@ -4,5 +4,4 @@ export interface UserInfo {
   avatar: string;
   platform: string;
   email: string;
-  image: string;
 }

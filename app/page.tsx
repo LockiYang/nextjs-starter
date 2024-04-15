@@ -48,13 +48,13 @@ export default async function Home() {
 
       <div>
         <div className="flex">
-          {user?.image ? (
+          {user?.avatar ? (
             <>
               {" "}
               Current User:{" "}
               <Image
                 className="relative rounded-full ml-3 dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-                src={user.image}
+                src={user.avatar}
                 alt="Next.js Logo"
                 width={36}
                 height={36}
