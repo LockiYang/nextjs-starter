@@ -3,10 +3,16 @@ import { getCurrentUser } from "@/app/lib/sesstion";
 import { UserInfo } from "@/types/user";
 import Link from "next/link";
 import SignOut from "@/components/SignOut";
+import redis from "@/app/lib/redis";
+import TablerEyeFilled from "@/components/shared/icons/eye";
+import { nFormatter } from "@/app/lib/utils";
 
 export default async function Home() {
   const user = (await getCurrentUser()) as UserInfo;
   console.log(user);
+
+  await redis.incr("views");
+  const views = (await redis.get("views")) as number;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -79,6 +85,13 @@ export default async function Home() {
         ) : (
           <SignOut></SignOut>
         )}
+        <div className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800">
+          <TablerEyeFilled />
+          <p>
+            <span className="hidden sm:inline-block">Page Views</span>{" "}
+            <span className="font-semibold">{nFormatter(views)}</span>
+          </p>
+        </div>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
