@@ -1,17 +1,16 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** tailwindcss是一个postcss插件，在编译过程中把class编译成真正的样式 */
+/** nextjs 13似乎不支持tailwind和postcss的ejs配置文件，所以只能用js配置文件 */
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ["class"],
   content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        // border-border 自定义颜色类，后面的border代表的是颜色
-        // var(--border)来自于globals.css
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -46,13 +45,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
     },
   },
   plugins: [],
 };
-export default config;

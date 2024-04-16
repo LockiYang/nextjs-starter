@@ -68,12 +68,9 @@
 
 @layer base {
   * {
-    /* 在tailwind.config.ts中定义 */
-    /* 将.border-border应用到所有元素 */
     @apply border-border;
   }
   body {
-    /* 将.bg-background和.text-foreground应用到body元素 */
     @apply bg-background text-foreground;
   }
 }
